@@ -103,16 +103,23 @@ $(document).bind('connect', function (ev, data) {
     Arthur.connection = conn;
 });
 
+function onTimer()
+{
+    console.log("2sec timer is called, we can start sending updated values");
+}
+
 $(document).bind('connected', function () {
     console.log('Connected to HIT platform');
     Arthur.connection.addHandler(Arthur.handle_message,
                                  null, "message", "chat");
     Arthur.connection.send($pres());
-    var msg = $msg({to: 'hit1@whiskey.ticx.boschtt.net', type: 'chat'})
-                .c('body').t("TDS GET *.*");
-    Arthur.connection.send(msg);
-    $(window).setInterval($(document).trigger('onTimer'), 5000);
+    //var msg = $msg({to: 'hit1@whiskey.ticx.boschtt.net', type: 'chat'})
+    //            .c('body').t("TDS GET *.*");
+    //Arthur.connection.send(msg);
+    setInterval(onTimer, 2000);
 });
+
+
 
 $(document).bind('onTimer', function() {
     console.log("5sec timer is called");
@@ -164,4 +171,21 @@ function() {
     Arthur.connection.disconnect();
     console.log("Disconnected");
   }
+});
+
+$(document).on('click', '.number-spinner button', function () {    
+	var btn = $(this),
+		oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+		newVal = 0;
+	
+	if (btn.attr('data-dir') == 'up') {
+		newVal = parseInt(oldValue) + 1;
+	} else {
+		if (oldValue > 1) {
+			newVal = parseInt(oldValue) - 1;
+		} else {
+			newVal = 1;
+		}
+	}
+	btn.closest('.number-spinner').find('input').val(newVal);
 });
