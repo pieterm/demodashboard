@@ -133,7 +133,8 @@ $(document).ready(function() {
   $('#modalLoginForm').modal('show');
   $('#hitPassword').focus();
   
-  setInterval(onTimer, 2000);
+  //For testing (without connection):
+  //setInterval(onTimer, 2000);
 });
 
 $('#loginButton').on('click',
