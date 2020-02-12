@@ -106,6 +106,9 @@ $(document).bind('connect', function (ev, data) {
 function onTimer()
 {
     console.log("2sec timer is called, we can start sending updated values");
+    console.log("current (local) setpoint: " + $('#setpointValue').val());
+    console.log("current (local) gas price: " + $('#gasCostValue').val());
+    console.log("current (local) electricity price: " + $('#electricityCostValue').val());
 }
 
 $(document).bind('connected', function () {
@@ -119,12 +122,6 @@ $(document).bind('connected', function () {
     setInterval(onTimer, 2000);
 });
 
-
-
-$(document).bind('onTimer', function() {
-    console.log("5sec timer is called");
-});
-
 $(document).bind('disconnected', function () {
     console.log("Received disconnected event");
 });
@@ -136,6 +133,7 @@ $(document).ready(function() {
   $('#modalLoginForm').modal('show');
   $('#hitPassword').focus();
   
+  setInterval(onTimer, 2000);
 });
 
 $('#loginButton').on('click',
