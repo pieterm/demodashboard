@@ -1,3 +1,7 @@
+var Settings = {
+    transmittedSetpoint : -1
+};
+
 var Arthur = {
     connection: null,
 
@@ -109,6 +113,25 @@ function onTimer()
     console.log("current (local) setpoint: " + $('#setpointValue').val());
     console.log("current (local) gas price: " + $('#gasCostValue').val());
     console.log("current (local) electricity price: " + $('#electricityCostValue').val());
+    console.log("previously transmitted setpoint: "+Settings.transmittedSetpoint);
+    var desiredSetpoint = $('#setpointValue').val();
+    if (desiredSetpoint != Settings.transmittedSetpoint)
+    {
+        console.log("Transmitting setpoint update");
+        if (Arthur.connection != null)
+        {
+           
+           var msg = $msg({to: 'hit1@whiskey.ticx.boschtt.net', type: 'chat'})
+                   .c('body').t("TDS SET xCU_HP.setpoint="+desiredSetpoint);
+           console.log("Sending message "+msg);
+           Arthur.connection.send(msg);
+           Settings.transmittedSetpoint = desiredSetpoint;
+        }
+    }
+    else
+    {
+        console.log("Setpoint has not been changed");
+    }
 }
 
 $(document).bind('connected', function () {
