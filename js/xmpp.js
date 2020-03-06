@@ -100,6 +100,8 @@ var Arthur = {
                                         // remove the HP value
                                         var msg = $msg({to: Settings.toUser, type: 'chat'}).c('body').t('TDS SET TEST.actual_power_HP=NaN');
                                         Arthur.connection.send(msg);
+                                        var msg = $msg({to: Settings.toUser, type: 'chat'}).c('body').t('TDS SET xCU_HP.power_setpoint=0');
+                                        Arthur.connection.send(msg);
                                         
                                         setTimeout(function(){ 
                                             $('#actualPowerHP').html('--');
