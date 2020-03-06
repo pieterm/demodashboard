@@ -43,6 +43,12 @@
           <label data-error="wrong" data-success="right" for="defaultForm-pass">Your HIT password</label>
         </div>
 
+        <div class="md-form mb-5">
+          <i class="fas fa-user prefix grey-text"></i>
+          <input type="email" id="CBxUser" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="defaultForm-email">CBx user</label>
+        </div>
+
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button class="btn btn-default" id="loginButton">Login</button>
@@ -128,7 +134,7 @@
 				<span class="input-group-btn">
 					<button class="btn btn-default" data-dir="dwn"><span class="fa fa-minus"></span></button>
 				</span>
-				<input type="text" class="form-control text-center" value="21">
+				<input type="text" class="form-control text-center" id="setpointValue" value="21">
 				<span class="input-group-btn">
 					<button class="btn btn-default" data-dir="up"><span class="fa fa-plus"></span></button>
 				</span>
@@ -154,16 +160,40 @@
       <div class="col-12 p-1">
         <div class="card grey lighten-2">
           <div class="card-body pb-0">
-            <i class="fas fa-bolt fa-3x pb-4"></i>
+            <i class="fas fa-fire fa-3x pb-4"></i>
             <div class="d-flex justify-content-between">
-              <p class="mb-0 h5" id="actualPower">--</p>
-              <p class="mb-0 hour" id="actualPowerUpdateTime">--:--</p>
+              <p class="mb-0 h5" id="actualPowerBM">--</p>
+              <p class="mb-0 hour" id="actualPowerBMUpdateTime">--:--</p>
             </div>
           </div>
           <hr>
           <div class="card-body pt-0">
-            <h6 class="font-weight-bold mb-1">Actual Power</h6>
-            <p class="mb-0">Actual power provided by HIT device</p>
+            <h6 class="font-weight-bold mb-1">Actual Power BM</h6>
+            <p class="mb-0">Actual power provided by the burner module connected to the HIT device</p>
+          </div>
+        </div>
+      </div>
+      <!-- Grid column -->
+  </div>
+  
+  
+  <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-12 p-1">
+        <div class="card grey lighten-2">
+          <div class="card-body pb-0">
+            <i class="fas fa-bolt fa-3x pb-4"></i>
+            <div class="d-flex justify-content-between">
+              <p class="mb-0 h5" id="actualPowerHP">--</p>
+              <p class="mb-0 hour" id="actualPowerHPUpdateTime">--:--</p>
+            </div>
+          </div>
+          <hr>
+          <div class="card-body pt-0">
+            <h6 class="font-weight-bold mb-1">Actual Power HP</h6>
+            <p class="mb-0">Actual power provided by the heat pump connected to the HIT device</p>
           </div>
         </div>
       </div>
@@ -190,6 +220,7 @@
             <p class="mb-0">
             <p id="updateStatus"></p>
             <button type="button" class="btn btn-primary btn-rounded" id="updateButton">Update NOW</button>
+            <button type="button" class="btn btn-primary btn-rounded" id="downgradeButton">Downgrade</button>
             </p>
             
           </div>
@@ -198,68 +229,50 @@
       <!-- Grid column -->
   </div>
   
+  
+    <!-- Grid row -->
+    <div class="row">
+      <!-- Grid column -->
+      <div class="col-12 p-1">
+        <div class="card grey lighten-2">
+          <div class="card-body pt-0">
+            <h6 class="font-weight-bold mb-1">Test</h6>
+            <p class="mb-0">
+            <p id="test-caption">Subscribe or unsubscribe to test.throughput_test*</p>
+            <p id="test-message0"></p>
+            <p id="test-message1"></p>
+            <p id="test-message2"></p>
+            <p id="test-message3"></p>
+            <button type="button" class="btn btn-primary btn-rounded" id="subscribeTestButton">Subscribe</button>
+            <button type="button" class="btn btn-primary btn-rounded" id="unsubscribeTestButton">Unsubscribe</button>
+            </p>
+            
+          </div>
+        </div>
+      </div>
+      <!-- Grid column -->
+  </div>
+      
 
-   <!-- Grid row -->
+       <!-- Grid row -->
     <div class="row">
 
       <!-- Grid column -->
       <div class="col-12 p-1">
         <div class="card grey lighten-2">
-          <div class="card-body pb-0">
-            <i class="fas fa-burn fa-3x pb-4"></i>
-            <div class="d-flex justify-content-between">
-              <p class="mb-0 h5" id="gasCost">--,-- EURO</p>
-                <div class="input-group number-spinner">
-				<span class="input-group-btn">
-					<button class="btn btn-default" data-dir="dwn"><span class="fa fa-minus"></span></button>
-				</span>
-				<input type="text" class="form-control text-center" value="21">
-				<span class="input-group-btn">
-					<button class="btn btn-default" data-dir="up"><span class="fa fa-plus"></span></button>
-				</span>
-			</div>
-            </div>
-          </div>
-          <hr>
           <div class="card-body pt-0">
-            <h6 class="font-weight-bold mb-1">Natural Gas price</h6>
-            <p class="mb-0">Current natural gas price (EURO/m3)</p>
+            <h6 class="font-weight-bold mb-1">Log out</h6>
+            <p class="mb-0">
+            <p id="logout-users"></p>
+            <button type="button" class="btn btn-primary btn-rounded" id="logoutButton">Log out</button>
+            </p>
+            
           </div>
         </div>
       </div>
       <!-- Grid column -->
   </div>
   
-     <!-- Grid row -->
-    <div class="row">
-
-      <!-- Grid column -->
-      <div class="col-12 p-1">
-        <div class="card grey lighten-2">
-          <div class="card-body pb-0">
-            <i class="fas fa-plug fa-3x pb-4"></i>
-            <div class="d-flex justify-content-between">
-              <p class="mb-0 h5" id="gasCost">--,-- EURO</p>
-                <div class="input-group number-spinner">
-				<span class="input-group-btn">
-					<button class="btn btn-default" data-dir="dwn"><span class="fa fa-minus"></span></button>
-				</span>
-				<input type="text" class="form-control text-center" value="21">
-				<span class="input-group-btn">
-					<button class="btn btn-default" data-dir="up"><span class="fa fa-plus"></span></button>
-				</span>
-			</div>
-            </div>
-          </div>
-          <hr>
-          <div class="card-body pt-0">
-            <h6 class="font-weight-bold mb-1">Natural Gas price</h6>
-            <p class="mb-0">Current natural gas price (EURO/m3)</p>
-          </div>
-        </div>
-      </div>
-      <!-- Grid column -->
-  </div>
   
 </div>
   <!-- End your project here-->
